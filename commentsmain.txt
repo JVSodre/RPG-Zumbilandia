@@ -1,0 +1,15 @@
+import { Personagem } from "./Personagem.ts"; // Importando o arquivo de Personagem
+import prompt from "prompt-sync";
+
+const teclado = prompt();
+
+teclado("Pressione alguma tela pra continuar..."); // para usar o prompt-sync
+
+const p: Personagem = new Personagem(); // cria o objeto tipo Personagem
+p.nome = "Edécio"; //já aparece o "nome" depois do "p", já que importamos o Personagem
+p.classe = "Eunuco";
+p.vida = 10;
+p.arma = "Livro de lógica - Bem legal"
+
+console.log(p);
+console.table(p); // mostra os dados em tabela

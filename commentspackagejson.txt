@@ -1,0 +1,20 @@
+{
+  "name": "poo262n",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs", // trocamos para module, já que o commonjs usa o require e etc...
+  "dependencies": {   
+    "typescript": "^7.0.2"
+  },                              // A instalação com -D separa o dependecies, um é instalado no projeto em si e o outro é apenas para o dev, gerando segurança, não baixando dependencias que tem vulnerabilidades e também auxiliam no tamanho do projeto, deixando-o menor. "npm i typescript" (sem o d)  "npm i -D prompt-sync @types/prompt-sync" com o -D
+  "devDependencies": {
+    "@types/prompt-sync": "^4.2.3",
+    "prompt-sync": "^4.2.0"             // "^" esse simbolo significa que se houver alguma atualização o software vai receber a nova versão. Atualização ver no package-lock.json. Se atualizar da ex: 4 para 5, tem um trabalhinho para atualizar, pois não é só testar e ver se quebra, tem que ver as instruções para melhoria do projeto. 
+  }
+}
