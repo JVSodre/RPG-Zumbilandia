@@ -1,15 +1,29 @@
 // classe --> campos / atributos --> metodos
 
-// classe (nome de classe primeiro caractere maiusculo)
-export class Personagem { // fecha lá embaixo, unindo campos e metodos // usar export para usar em outros arquivos
+export class Personagem { // classe (nome de classe primeiro caractere maiusculo)
 
-// campos / atributos
-nome: string = "";
-classe: string = "";
-nivel: number = 1;
-vida: number = 0;
-arma: string = "";
+    // atributos
+    nome: string;
+    classe: string;
+    nivel: number;
+    vida: number;
+    arma: string;
 
-// metodos
 
+    constructor( // construto, função que é executada quando a classe é instanciada
+        nome: string, // parâmetros do construtor, valores que precisam ser passados quando a classe é instanciada
+        classe: string,
+        nivel: number,
+        vida: number,
+        arma: string
+    ) {
+        this.nome = nome; // retorna o valor do parâmetro para o atributo da classe
+        this.classe = classe;
+        this.nivel = nivel;
+        this.vida = vida;
+        this.arma = arma;
+    }
 }
+
+
+
