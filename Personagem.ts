@@ -1,4 +1,5 @@
 // classe --> campos / atributos --> metodos
+import {Util} from "./Util.ts"
 
 export class Personagem { // classe (nome de classe primeiro caractere maiusculo)
 
@@ -28,15 +29,16 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     //métodos
 
     treinarAtaque(): void{
-        this.ataque += 5+Math.floor(Math.random()*10);
-        this.vida -= 5+Math.floor(Math.random()*10);
+        
+        this.ataque += Util.randomizar(5, 10);
+        this.vida -= Util.randomizar(5, 10);
         if(this.vida <= 0){
             throw new Error("Personagem morreu!")
         }
     }
 
     curarPersonagem(): void{
-        this.vida += 5+Math.floor(Math.random()*15)
+        this.vida += Util.randomizar(5, 15);
         if (this.vida >= this.vida) {
             throw new Error("Vida máxima!")
         }
