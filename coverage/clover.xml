@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1789686804644" clover="3.2.0">
+  <project timestamp="1789686804644" name="All files">
+    <metrics statements="17" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="5" coveredmethods="1" elements="26" coveredelements="7" complexity="0" loc="17" ncloc="17" packages="1" files="2" classes="2"/>
+    <file name="Personagem.ts" path="C:\Users\CARLOSHENRIQUEMOURAD\Desktop\RPG-Zumbilandia\Personagem.ts">
+      <metrics statements="16" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="4" coveredmethods="1"/>
+      <line num="21" count="1" type="stmt"/>
+      <line num="22" count="1" type="stmt"/>
+      <line num="23" count="1" type="stmt"/>
+      <line num="24" count="1" type="stmt"/>
+      <line num="25" count="1" type="stmt"/>
+      <line num="26" count="1" type="stmt"/>
+      <line num="33" count="0" type="stmt"/>
+      <line num="34" count="0" type="stmt"/>
+      <line num="35" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="36" count="0" type="stmt"/>
+      <line num="41" count="0" type="stmt"/>
+      <line num="42" count="0" type="cond" truecount="0" falsecount="2"/>
+      <line num="43" count="0" type="stmt"/>
+      <line num="48" count="0" type="stmt"/>
+      <line num="49" count="0" type="stmt"/>
+      <line num="50" count="0" type="stmt"/>
+    </file>
+    <file name="Util.ts" path="C:\Users\CARLOSHENRIQUEMOURAD\Desktop\RPG-Zumbilandia\Util.ts">
+      <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <line num="3" count="0" type="stmt"/>
+    </file>
+  </project>
+</coverage>

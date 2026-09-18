@@ -7,6 +7,7 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     nome: string;
     classe: string;
     nivel: number;
+    vidaMaxima: number;
     vida: number;
     ataque: number;
     arma: string;
@@ -21,6 +22,7 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
         this.nome = nome; // retorna o valor do parâmetro para o atributo da classe
         this.classe = classe;
         this.nivel = 1;
+        this.vidaMaxima = 100
         this.vida = 75;
         this.ataque = 25;
         this.arma = "Livro de Lógica";
@@ -31,15 +33,21 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     treinarAtaque(): void{
         
         this.ataque += Util.randomizar(5, 10);
-        this.vida -= Util.randomizar(5, 10);
+        //this.vida -= Util.randomizar(5, 10);
+        this.vida -= 5
         if(this.vida <= 0){
             throw new Error("Personagem morreu!")
         }
     }
 
     curarPersonagem(): void{
-        this.vida += Util.randomizar(5, 15);
-        if (this.vida >= this.vida) {
+        //this.vida += Util.randomizar(5, 10);
+        if (this.vida < this.vidaMaxima) {
+            this.vida += 5
+            if (this.vida > this.vidaMaxima) {
+                this.vida = this.vidaMaxima
+            }
+        } else {
             throw new Error("Vida máxima!")
         }
     }
