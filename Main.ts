@@ -13,7 +13,7 @@ let nome = teclado("Digite o nome do seu personagem: "); // solicita o nome do p
 let personagem: Personagem = new Personagem(nome) // Cria o personagem principal
 let mao: Arma = new Arma("Mão", 5, 10) // cria a arma mão
 let bastao: Arma = new Arma("Bastão", 10, 3) // cria a arma bastão, a durabilidade 3 é só um teste
-
+ 
 let escolha = 0; // variável para armazenar a escolha do usuário no menu
 
 function mapa() { // função que mostra as opções de locais para explorar no mapa, ainda precisa ser polida 
@@ -59,7 +59,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
             personagem.arma.ataque(); // puxa a função ataque da arma que reduz sua durabilidade
             console.log(personagem.arma); // mostra os status da arma
             if (personagem.arma.durabilidade <= 0) { // verifica se a arma tem 0 de durabilidade, se tiver ela quebra e o personagem volta a ter a mao como arma
-                personagem.arma = mao
+                personagem.trocaArma = mao
                 bastao.restaura() // puxa a função que restaura a durabilidade da arma, assim da pra reutilizar ela
             }
             teclado("Pressione qualquer tecla para continuar...");
@@ -83,7 +83,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
 
         case 4:
             personagem.uparPersonagem()
-            console.log(`Você está no nível ${personagem.nivel} com ${personagem.vidaAtual} de vida e ${personagem.arma} de arma`)
+            console.log(`Você está no nível ${personagem.nivel} com ${personagem.vidaAtual} de vida e ${personagem.arma.nome} de arma`)
             break;
 
         case 5: 
@@ -91,7 +91,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
             console.log("você quer pegar o bastão? (S / N)") 
             let troca = teclado("Escolha: ").toUpperCase() 
             if (troca == "S") { // verifica se o usuário quer trocar de arma
-                personagem.arma = bastao; // troca a arma do personagem
+                personagem.trocaArma = bastao; // troca a arma do personagem
             }
             console.log(personagem.arma) // visualização de teste
             teclado("Pressione qualquer tecla para continuar...")

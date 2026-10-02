@@ -1,24 +1,31 @@
 export class Arma {
-    nome: string;
-    dano: number;
-    durabilidadeMaxima: number;
-    durabilidade: number;
+    private _nome: string;
+    private _dano: number;
+    private _durabilidadeMaxima: number;
+    private _durabilidade: number;
 
     constructor(nome: string, dano: number, durabilidade: number) {
-        this.nome = nome;
-        this.dano = dano;
-        this.durabilidadeMaxima = durabilidade;
-        this.durabilidade = durabilidade;
+        this._nome = nome;
+        this._dano = dano;
+        this._durabilidadeMaxima = durabilidade;
+        this._durabilidade = durabilidade;
     }
 
-    ataque(): void {
-        if (this.durabilidade <= 0) {
+    public get nome(): string {
+        return this._nome;
+    }
+    public get durabilidade(): number {
+        return this._durabilidade;
+    }
+
+    public ataque(): void {
+        if (this._durabilidade <= 0) {
             throw new Error("A arma quebrou")
         }
-        this.durabilidade -= 1
+        this._durabilidade -= 1
     }
 
-    restaura(): void {
-        this.durabilidade = this.durabilidadeMaxima;
+    public restaura(): void {
+        this._durabilidade = this._durabilidadeMaxima;
     }
 }
