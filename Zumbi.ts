@@ -21,4 +21,12 @@ export class Zumbi {
     public set dano(dano: number) {
         this._dano = dano;
     }
+
+    public habilidade(): number{
+        return 1; // ele nunca vai funcionar, porque é sobreescrito pela habilidade do zumbi variante
+    }
+    public resetaDano(): void{
+    }
+    public resetaVida(): void{
+    }
 } 

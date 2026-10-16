@@ -2,6 +2,8 @@ import { Arma } from "./Arma.ts";
 import { Personagem } from "./Personagem.ts";
 import prompt from "prompt-sync";
 import { ZumbiCritico } from "./ZumbiCritico.ts";
+import { Combate } from "./Combate.ts"
+import { Zumbi } from "./Zumbi.ts";
 
 const teclado = prompt(); // variavel que permite a entrada de dados do usuario
 
@@ -18,7 +20,7 @@ let zumbiCritico = new ZumbiCritico() // cria o zumbi critico
  
 let escolha = 0; // variável para armazenar a escolha do usuário no menu
 
-function combate(personagem: Personagem, zumbi: ZumbiCritico): void{ // função que realiza o combate entre o personagem e o zumbi
+function combate(personagem: Personagem, zumbi: Zumbi): void{ // função que realiza o combate entre o personagem e o zumbi
     escolha = 0; // reseta a escolha do usuário para 0, assim o combate pode ser reiniciado
     while(zumbi.vida > 0 && personagem.vidaAtual > 0){
     console.clear();    
@@ -32,28 +34,16 @@ function combate(personagem: Personagem, zumbi: ZumbiCritico): void{ // função
         
     switch (escolha) {
         case 1: // caso o usuário escolha atacar, a vida do inimigo é reduzida pelo dano da arma
-            personagem.arma.ataque(); // puxa a função ataque da arma que reduz sua durabilidade    
-            if (personagem.arma.durabilidade <= 0) { // verifica se a arma tem 0 de durabilidade, se tiver ela quebra e o personagem volta a ter a mao como arma
-                personagem.arma.restaura()
-                personagem.trocaArma = mao
-            }
-            zumbi.vida -= personagem.arma.dano; // reduz a vida do inimigo pelo dano da arma
-            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
-            personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
-            zumbi.resetaDano();
+            Combate.turnoAtaque(personagem, zumbi)
             break;
 
         case 2: // caso o usuário escolha curar, a vida do personagem é aumentada em 10
-            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
-            personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
-            zumbi.resetaDano();
+            Combate.turnoNormal(personagem, zumbi)
             personagem.curarPersonagem()
             break;
         
         case 3: // caso o usuário escolha pular a rodada, a vida do personagem é reduzida pelo dano do inimigo
-            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
-            personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
-            zumbi.resetaDano();
+            Combate.turnoNormal(personagem, zumbi)
             break;
         }  
     }
@@ -66,7 +56,6 @@ function combate(personagem: Personagem, zumbi: ZumbiCritico): void{ // função
         console.log(`Sua jornada acaba aqui...`)
         personagem.restauraVida(); // reseta a vida do personagem para o valor inicial
     }
-    teclado("Pressione qualquer tecla para continuar...")
 }
 
 function mapa() { // função que mostra as opções de locais para explorar no mapa, ainda precisa ser polida 
@@ -74,7 +63,7 @@ function mapa() { // função que mostra as opções de locais para explorar no 
     console.log(`
      ______________________________________________________________________
     |                                                                      |
-    |       ° Hospital                                                     |
+    |       ° Hospital                              °Banco                 |
     |                                                                      |
     |                                                                      |
     |                                               °Delegacia             |
@@ -158,7 +147,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
 
         case 7:
             combate(personagem, zumbiCritico) // chama a função de combate
-        
+            teclado("Pressione qualquer tecla para continuar...")
             break
         case 9: // sai do loop e encerra o programa
             console.clear();
