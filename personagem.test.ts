@@ -42,12 +42,12 @@ describe("Quando uparPersonagem", () => {
         //cenário
             const gladimir: Personagem = new Personagem("Gladimir")
             gladimir.nivel = 1
-            gladimir.vidaMaxima = 100
+            gladimir.vidaAtual = 100
         //Execução
-            gladimir.uparPersonagem()
+            gladimir.uparPersonagem(150)
         //Validação
             expect(gladimir.nivel).toBeGreaterThan(1)
-            expect(gladimir.vidaMaxima).toBeGreaterThan(100)
+            expect(gladimir.vidaAtual).toBeGreaterThan(100)
 
     })
 })
@@ -81,9 +81,16 @@ describe("Quando personagem curar além da vida máxima", () => {
     })
 })
 
+describe("Quando resetar a vida do personagem", () => {
 
-
-
+    it("Deve restaurar a vida do personagem para o valor máximo", () => {
+        const gladimir: Personagem = new Personagem("Gladimir")
+        gladimir.vidaAtual = 50
+        gladimir.vidaMaxima = 100
+        gladimir.restauraVida()
+        expect(gladimir.vidaAtual).toBe(100)
+    })
+})
 
 
 

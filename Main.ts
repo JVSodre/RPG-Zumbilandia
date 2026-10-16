@@ -1,6 +1,7 @@
 import { Arma } from "./Arma.ts";
 import { Personagem } from "./Personagem.ts";
 import prompt from "prompt-sync";
+import { ZumbiCritico } from "./ZumbiCritico.ts";
 
 const teclado = prompt(); // variavel que permite a entrada de dados do usuario
 
@@ -13,8 +14,60 @@ let nome = teclado("Digite o nome do seu personagem: "); // solicita o nome do p
 let personagem: Personagem = new Personagem(nome) // Cria o personagem principal
 let mao: Arma = new Arma("Mão", 5, 10) // cria a arma mão
 let bastao: Arma = new Arma("Bastão", 10, 3) // cria a arma bastão, a durabilidade 3 é só um teste
+let zumbiCritico = new ZumbiCritico() // cria o zumbi critico
  
 let escolha = 0; // variável para armazenar a escolha do usuário no menu
+
+function combate(personagem: Personagem, zumbi: ZumbiCritico): void{ // função que realiza o combate entre o personagem e o zumbi
+    escolha = 0; // reseta a escolha do usuário para 0, assim o combate pode ser reiniciado
+    while(zumbi.vida > 0 && personagem.vidaAtual > 0){
+    console.clear();    
+    console.log(`===== Combate =====`);
+    console.table({personagem, zumbi}) // mostra a vida do personagem, o dano da arma e a vida do inimigo
+    console.log("1. Atacar");
+    console.log("2. Curar");
+    console.log("3. Pula rodada")
+    console.log();
+    escolha = +teclado("Escolha: ");
+        
+    switch (escolha) {
+        case 1: // caso o usuário escolha atacar, a vida do inimigo é reduzida pelo dano da arma
+            personagem.arma.ataque(); // puxa a função ataque da arma que reduz sua durabilidade    
+            if (personagem.arma.durabilidade <= 0) { // verifica se a arma tem 0 de durabilidade, se tiver ela quebra e o personagem volta a ter a mao como arma
+                personagem.arma.restaura()
+                personagem.trocaArma = mao
+            }
+            zumbi.vida -= personagem.arma.dano; // reduz a vida do inimigo pelo dano da arma
+            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
+            personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
+            zumbi.resetaDano();
+            break;
+
+        case 2: // caso o usuário escolha curar, a vida do personagem é aumentada em 10
+            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
+            personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
+            zumbi.resetaDano();
+            personagem.curarPersonagem()
+            break;
+        
+        case 3: // caso o usuário escolha pular a rodada, a vida do personagem é reduzida pelo dano do inimigo
+            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
+            personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
+            zumbi.resetaDano();
+            break;
+        }  
+    }
+    console.clear();
+    if (zumbi.vida <= 0) { // caso a vida do inimigo seja menor ou igual a 0, o usuário vence o combate
+        console.log("Você venceu o combate!");
+        personagem.uparPersonagem(100); // upar o personagem com 100 de xp
+        zumbi.resetaVida(); // reseta a vida do inimigo para o valor inicial
+    } else {
+        console.log(`Sua jornada acaba aqui...`)
+        personagem.restauraVida(); // reseta a vida do personagem para o valor inicial
+    }
+    teclado("Pressione qualquer tecla para continuar...")
+}
 
 function mapa() { // função que mostra as opções de locais para explorar no mapa, ainda precisa ser polida 
     console.clear();
@@ -31,7 +84,7 @@ function mapa() { // função que mostra as opções de locais para explorar no 
 }
 
 while (escolha !== 9) { // loop principal do programa, que continua até o usuário escolher sair
-
+    console.clear();
     console.log("===== Menu ====="); 
     console.log(); // da um espaço em branco no console
     console.log("1. Mostrar resumo do personagem");
@@ -40,6 +93,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
     console.log("4. Upar Personagem");
     console.log("5. Pegar Bastão")
     console.log("6. Mostrar Mapa")
+    console.log("7. Combate")
     console.log("9. Sair");
     console.log();
     escolha = +teclado("Escolha: "); // solicita a escolha do usuário no menu
@@ -82,7 +136,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
             break
 
         case 4:
-            personagem.uparPersonagem()
+            personagem.uparPersonagem(100)
             console.log(`Você está no nível ${personagem.nivel} com ${personagem.vidaAtual} de vida e ${personagem.arma.nome} de arma`)
             break;
 
@@ -102,6 +156,10 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
             teclado("Pressione qualquer tecla para continuar...")
             break
 
+        case 7:
+            combate(personagem, zumbiCritico) // chama a função de combate
+        
+            break
         case 9: // sai do loop e encerra o programa
             console.clear();
             console.log("Saindo...");

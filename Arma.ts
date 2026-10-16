@@ -17,6 +17,9 @@ export class Arma {
     public get durabilidade(): number {
         return this._durabilidade;
     }
+    public get dano(): number {
+        return this._dano;
+    }
 
     public ataque(): void {
         if (this._durabilidade <= 0) {
