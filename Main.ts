@@ -14,8 +14,8 @@ console.log();
 let nome = teclado("Digite o nome do seu personagem: "); // solicita o nome do personagem ao usuário
 
 let personagem: Personagem = new Personagem(nome) // Cria o personagem principal
-let mao: Arma = new Arma("Mão", 5, 10) // cria a arma mão
-let bastao: Arma = new Arma("Bastão", 10, 3) // cria a arma bastão, a durabilidade 3 é só um teste
+let mao: Arma = new Arma("Mão", 5, 100) // cria a arma mão
+let bastao: Arma = new Arma("Bastão", 10, 12) // cria a arma bastão, a durabilidade 3 é só um teste
 let zumbiCritico = new ZumbiCritico() // cria o zumbi critico
  
 let escolha = 0; // variável para armazenar a escolha do usuário no menu

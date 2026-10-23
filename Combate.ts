@@ -1,7 +1,7 @@
 import { Personagem } from "./Personagem.ts";
 import { Zumbi } from "./Zumbi.ts";
 import { Arma } from "./Arma.ts"
-let mao: Arma = new Arma("Mão", 5, 10) // cria a arma mão
+let mao: Arma = new Arma("Mão", 5, 100) // cria a arma mão
 
 export class Combate{
     static turnoAtaque(personagem: Personagem, zumbi: Zumbi) {

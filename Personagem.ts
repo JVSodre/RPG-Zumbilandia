@@ -1,7 +1,7 @@
 // classe --> campos / atributos --> metodos
 import {Util} from "./Util.ts"
 import {Arma} from "./Arma.ts"
-let mao: Arma = new Arma("Mão", 5, 10)
+let mao: Arma = new Arma("Mão", 5, 100)
 
 export class Personagem { // classe (nome de classe primeiro caractere maiusculo)
 
