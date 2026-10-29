@@ -1,6 +1,6 @@
+import prompt from "prompt-sync";
 import { Arma } from "./Arma.ts";
 import { Personagem } from "./Personagem.ts";
-import prompt from "prompt-sync";
 import { ZumbiCritico } from "./ZumbiCritico.ts";
 import { Combate } from "./Combate.ts"
 import { Zumbi } from "./Zumbi.ts";
@@ -13,24 +13,32 @@ console.log("===== Criando um novo personagem ====="); // mensagem informando qu
 console.log(); 
 let nome = teclado("Digite o nome do seu personagem: "); // solicita o nome do personagem ao usuário
 
-let personagem: Personagem = new Personagem(nome) // Cria o personagem principal
-let mao: Arma = new Arma("Mão", 5, 100) // cria a arma mão
-let bastao: Arma = new Arma("Bastão", 10, 12) // cria a arma bastão, a durabilidade 3 é só um teste
-let zumbiCritico = new ZumbiCritico() // cria o zumbi critico
+let personagem: Personagem = new Personagem(nome); // Cria o personagem principal
+let mao: Arma = new Arma("Mão", 5, 100); // cria a arma mão
+let bastao: Arma = new Arma("Bastão", 15, 12); // cria a arma bastão, a durabilidade 3 é só um teste
+let zumbiCritico = new ZumbiCritico(); // cria o zumbi critico
  
 let escolha = 0; // variável para armazenar a escolha do usuário no menu
 
-function combate(personagem: Personagem, zumbi: Zumbi): void{ // função que realiza o combate entre o personagem e o zumbi
+function combate(personagem: Personagem, zumbi: Zumbi): void { // função que realiza o combate entre o personagem e o zumbi
     escolha = 0; // reseta a escolha do usuário para 0, assim o combate pode ser reiniciado
+
     while(zumbi.vida > 0 && personagem.vidaAtual > 0){
-    console.clear();    
-    console.log(`===== Combate =====`);
-    console.table({personagem, zumbi}) // mostra a vida do personagem, o dano da arma e a vida do inimigo
-    console.log("1. Atacar");
-    console.log("2. Curar");
-    console.log("3. Pula rodada")
-    console.log();
-    escolha = +teclado("Escolha: ");
+        console.clear();    
+        console.log(`===== Combate =====`);
+        console.table({
+            Personagem: personagem.nome,
+            VidaPersonagem: `${personagem.vidaAtual}/${personagem.vidaMaxima}`,
+            ArmaEquipada: personagem.arma.nome,
+            DurabilidadeArma: personagem.arma.durabilidade,
+            VidaZumbi: zumbi.vida}) // mostra a vida do personagem, o dano da arma, a arma equipada e a vida do inimigo    
+        
+        console.log("1. Atacar");
+        console.log("2. Curar (+15 HP)");
+        console.log("3. Pula rodada")
+        console.log();
+        escolha = +teclado("Escolha: ");
+        console.log();
         
     switch (escolha) {
         case 1: // caso o usuário escolha atacar, a vida do inimigo é reduzida pelo dano da arma
@@ -38,14 +46,20 @@ function combate(personagem: Personagem, zumbi: Zumbi): void{ // função que re
             break;
 
         case 2: // caso o usuário escolha curar, a vida do personagem é aumentada em 10
+            try {
+                personagem.curarPersonagem() // faz a tentativa de curar o personagem
+            } catch (erro) {
+                console.log((erro as Error).message)
+            }
             Combate.turnoNormal(personagem, zumbi)
-            personagem.curarPersonagem()
             break;
         
         case 3: // caso o usuário escolha pular a rodada, a vida do personagem é reduzida pelo dano do inimigo
-            Combate.turnoNormal(personagem, zumbi)
+            console.log("Você pulou a rodada!");
+            Combate.turnoNormal(personagem, zumbi);
             break;
         }  
+        teclado("Pressione uma tecla para continuar...")
     }
     console.clear();
     if (zumbi.vida <= 0) { // caso a vida do inimigo seja menor ou igual a 0, o usuário vence o combate

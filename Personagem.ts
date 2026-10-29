@@ -1,7 +1,10 @@
 // classe --> campos / atributos --> metodos
 import {Util} from "./Util.ts"
 import {Arma} from "./Arma.ts"
-let mao: Arma = new Arma("Mão", 5, 100)
+
+const maoPadrao: Arma = new Arma("Mão", 5, 100);
+
+//let mao: Arma = new Arma("Mão", 5, 100)
 
 export class Personagem { // classe (nome de classe primeiro caractere maiusculo)
 
@@ -23,7 +26,7 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
         this._nivel = 1;
         this._vidaMaxima = 100;
         this._vidaAtual = 100;
-        this._arma = mao;
+        this._arma = maoPadrao;
         this._xp = 0;
     }
 
@@ -48,9 +51,17 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     public get vidaAtual(): number {
         return this._vidaAtual;
     }
+    public get vidaMaxima(): number {
+        return this._vidaMaxima;
+    }
     public get arma(): Arma {
         return this._arma;
     }
+    public get xp(): number {
+        return this._xp;
+    }
+
+
     public set vidaAtual(vida: number) {
         this._vidaAtual = vida;
     }
@@ -67,7 +78,7 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     public curarPersonagem(): void{
         //this.vida += Util.randomizar(5, 10);
         if (this._vidaAtual < this._vidaMaxima) {
-            this._vidaAtual += 5
+            this._vidaAtual += 15
             if (this._vidaAtual > this._vidaMaxima) {
                 this._vidaAtual = this._vidaMaxima
             }
@@ -76,11 +87,14 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
         }
     }
 
-    public uparPersonagem(xp: number): void{
-        this._xp += xp
-        if (this._xp >= 150) {
+    public uparPersonagem(xpGanha: number): void{
+        this._xp += xpGanha;
+        const xpNecessaria = 100 * this._nivel;
+
+        if (this._xp >= xpNecessaria) {
+            this._xp -= xpNecessaria
             this._nivel += 1
-            this._vidaMaxima += 75
+            this._vidaMaxima += 25
             this._vidaAtual = this._vidaMaxima
         }
     }
