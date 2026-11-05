@@ -20,6 +20,7 @@ export class Padre extends Personagem {
             personagem.vidaAtual = 0; 
         } else {
             console.log("A tentativa de conversão falhou.");
+            personagem.atacar(this)
         }
     }
 
@@ -31,6 +32,7 @@ export class Padre extends Personagem {
             personagem.vidaAtual = 0;
         } else {
             console.log("O contra-ataque falhou.");
+            personagem.atacar(this)
         }
     }
 

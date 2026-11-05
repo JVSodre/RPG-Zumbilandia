@@ -49,6 +49,26 @@ export class Personagem {
         this._vidaMaxima = numero;
     }
 
+    public get nome(): string {
+        return this._nome;
+    }
+
+    public get vidaAtual(): number {
+        return this._vidaAtual;
+    }
+
+    public get esquiva(): number {
+        return this._esquiva;
+    }
+
+    public get resistencia(): number {
+        return this._resistencia;
+    }
+
+    public get vidaMaxima(): number {
+        return this._vidaMaxima;
+    }
+
     public atacar(personagem: Personagem) {
         console.log("desconhecido")
     }

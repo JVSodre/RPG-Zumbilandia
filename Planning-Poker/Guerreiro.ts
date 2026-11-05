@@ -20,7 +20,7 @@ export class Guerreiro extends Personagem {
             console.log("O ataque Falhou")
         } else {
             personagem.vidaAtual -= this.poderAtaque * reduzDano
-            personagem.atacar
+            personagem.atacar(this)
         }
     }
 
@@ -31,7 +31,7 @@ export class Guerreiro extends Personagem {
             console.log("O ataque Falhou")
         } else {
             personagem.vidaAtual -= this.poderAtaque * reduzDano
-            personagem.atacar
+            personagem.atacar(this)
         }
     }
 
