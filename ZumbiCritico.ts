@@ -8,12 +8,12 @@ export class ZumbiCritico extends Zumbi {
         this._vidaMaxima = 100;
     }
 
-    public habilidade(): number {
+    public habilidade(): void {
         const _critico = Util.randomizar(1, 10);
         if (_critico == 10) {
-            return this.dano * 2;
+            this.dano = this.dano * 2;
         } else {
-            return this.dano;
+            this.dano = this.dano;
         }
     }
     public resetaDano(): void {

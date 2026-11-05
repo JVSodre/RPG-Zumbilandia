@@ -17,7 +17,7 @@ export class Combate {
         }
 
         if (zumbi.vida > 0) {
-            zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
+            zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
             personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
             zumbi.resetaDano();
         }
@@ -26,7 +26,7 @@ export class Combate {
 
     
     static turnoNormal(personagem: Personagem, zumbi: Zumbi) {
-        zumbi.dano = zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
+        zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
         personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo
         zumbi.resetaDano();
     }

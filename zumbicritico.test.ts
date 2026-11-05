@@ -11,9 +11,9 @@ describe("Quando usar habilidade", () => {
 
         jest.spyOn(Util, "randomizar").mockReturnValue(10);
 
-        const danoCritico = zumbiCritico.habilidade();
+        zumbiCritico.habilidade();
 
-        expect(danoCritico).toBe(20);
+        expect(zumbiCritico.dano).toBe(20);
 
         jest.restoreAllMocks();
     });

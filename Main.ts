@@ -17,7 +17,7 @@ let personagem: Personagem = new Personagem(nome); // Cria o personagem principa
 let mao: Arma = new Arma("Mão", 5, 100); // cria a arma mão
 let bastao: Arma = new Arma("Bastão", 15, 12); // cria a arma bastão, a durabilidade 3 é só um teste
 let zumbiCritico = new ZumbiCritico(); // cria o zumbi critico
- 
+
 let escolha = 0; // variável para armazenar a escolha do usuário no menu
 
 function combate(personagem: Personagem, zumbi: Zumbi): void { // função que realiza o combate entre o personagem e o zumbi
@@ -121,15 +121,7 @@ while (escolha !== 9) { // loop principal do programa, que continua até o usuá
             }
             teclado("Pressione qualquer tecla para continuar...");
             break;
-/*        case 2: // treina ataque
-            try{
-                personagem.treinarAtaque()
-            } catch (erro) {
-                console.log((erro as Error).message)
-                escolha = 9;
-            }
-            break
-*/
+
         case 3: 
             try{
                 personagem.curarPersonagem()

@@ -1,4 +1,4 @@
-export class Zumbi {
+export abstract class Zumbi {
     private _nome: string;
     private _nivel: number;
     private _vida: number;
@@ -22,11 +22,9 @@ export class Zumbi {
         this._dano = dano;
     }
 
-    public habilidade(): number{
-        return 1; // ele nunca vai funcionar, porque é sobreescrito pela habilidade do zumbi variante
-    }
-    public resetaDano(): void{
-    }
-    public resetaVida(): void{
-    }
+    public abstract habilidade(): void;
+
+    public abstract resetaDano(): void;
+    
+    public abstract resetaVida(): void;
 } 
