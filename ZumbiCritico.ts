@@ -4,7 +4,7 @@ import {Util} from "./Util.ts";
 export class ZumbiCritico extends Zumbi {
     private _vidaMaxima: number;
     constructor() {
-        super("Zumbi Crítico", 1, 100, 10);
+        super("Zumbi Crítico", 1, 100, 10, 100);
         this._vidaMaxima = 100;
     }
 

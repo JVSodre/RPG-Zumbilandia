@@ -1,10 +1,8 @@
-// classe --> campos / atributos --> metodos
 import {Util} from "./Util.ts"
 import {Arma} from "./Arma.ts"
 
-const maoPadrao: Arma = new Arma("Mão", 5, 100);
+let maoPadrao: Arma = new Arma("Mão", 5, 100);
 
-//let mao: Arma = new Arma("Mão", 5, 100)
 
 export class Personagem { // classe (nome de classe primeiro caractere maiusculo)
 
@@ -18,9 +16,6 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
 
     constructor( // construto, função que é executada quando a classe é instanciada
         nome: string, // parâmetros do construtor, valores que precisam ser passados quando a classe é instanciada
-        //vida: number,
-        //ataque: number,
-      
     ) {
         this._nome = nome;
         this._nivel = 1;
@@ -30,18 +25,7 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
         this._xp = 0;
     }
 
-    //métodos
 
-/*    treinarAtaque(): void{
-        
-        this.ataque += Util.randomizar(5, 10);
-        //this.vida -= Util.randomizar(5, 10);
-        this.vidaAtual -= 5
-        if(this.vidaAtual <= 0){
-            throw new Error("Personagem morreu!")
-        }
-    }
-*/
     public get nome(): string {
         return this._nome;
     }
@@ -76,7 +60,6 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     }
 
     public curarPersonagem(): void{
-        //this.vida += Util.randomizar(5, 10);
         if (this._vidaAtual < this._vidaMaxima) {
             this._vidaAtual += 15
             if (this._vidaAtual > this._vidaMaxima) {
@@ -87,8 +70,8 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
         }
     }
 
-    public uparPersonagem(xpGanha: number): void{
-        this._xp += xpGanha;
+    public uparPersonagem(xpGanho: number): void{
+        this._xp += xpGanho;
         const xpNecessaria = 100 * this._nivel;
 
         if (this._xp >= xpNecessaria) {

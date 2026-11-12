@@ -2,9 +2,8 @@ import { Personagem } from "./Personagem.ts";
 import { Zumbi } from "./Zumbi.ts";
 import { Arma } from "./Arma.ts"
 
-const maoCombate: Arma = new Arma("Mão", 5, 100); // cria a arma mão
+let maoCombate: Arma = new Arma("Mão", 5, 100); // cria a arma mão
 
-//let mao: Arma = new Arma("Mão", 5, 100) 
 
 export class Combate {
     static turnoAtaque(personagem: Personagem, zumbi: Zumbi) {
@@ -24,7 +23,6 @@ export class Combate {
         
     }
 
-    
     static turnoNormal(personagem: Personagem, zumbi: Zumbi) {
         zumbi.habilidade(); // puxa a função habilidade do zumbi critico que pode aumentar o dano do inimigo
         personagem.vidaAtual -= zumbi.dano; // reduz a vida do personagem pelo dano do inimigo

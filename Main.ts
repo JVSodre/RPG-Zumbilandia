@@ -64,7 +64,7 @@ function combate(personagem: Personagem, zumbi: Zumbi): void { // função que r
     console.clear();
     if (zumbi.vida <= 0) { // caso a vida do inimigo seja menor ou igual a 0, o usuário vence o combate
         console.log("Você venceu o combate!");
-        personagem.uparPersonagem(100); // upar o personagem com 100 de xp
+        personagem.uparPersonagem(zumbi.xp); // upar o personagem com o xp do zumbi
         zumbi.resetaVida(); // reseta a vida do inimigo para o valor inicial
     } else {
         console.log(`Sua jornada acaba aqui...`)
