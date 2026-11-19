@@ -1,5 +1,5 @@
 import { describe, expect, it, test } from "@jest/globals";
-import { Personagem } from "./Personagem.ts";
+import { Personagem } from "../src/models/Personagem.ts";
 
 /*
 describe("Quando treinarAtaque", () => {

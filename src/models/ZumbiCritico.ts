@@ -1,5 +1,5 @@
 import { Zumbi } from "./Zumbi.ts";
-import {Util} from "./Util.ts";
+import {Util} from "../utils/Util.ts";
 
 export class ZumbiCritico extends Zumbi {
     private _vidaMaxima: number;

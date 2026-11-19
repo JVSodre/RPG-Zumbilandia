@@ -1,8 +1,8 @@
 import { describe, expect, it, jest, } from "@jest/globals";
 import { Combate } from "./Combate.ts";
-import { Zumbi } from "./Zumbi.ts";
-import { ZumbiCritico } from "./ZumbiCritico.ts";
-import { Personagem } from "./Personagem.ts";
+import { Zumbi } from "../src/models/Zumbi.ts";
+import { ZumbiCritico } from "../src/models/ZumbiCritico.ts";
+import { Personagem } from "../src/models/Personagem.ts";
 
 describe("Quando atacar", () => {
     it("A vida do jogador e do zumbi devem diminuir", () => {

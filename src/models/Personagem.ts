@@ -1,4 +1,4 @@
-import {Util} from "./Util.ts"
+import {Util} from "../utils/Util.ts"
 import {Arma} from "./Arma.ts"
 
 let maoPadrao: Arma = new Arma("Mão", 5, 100);

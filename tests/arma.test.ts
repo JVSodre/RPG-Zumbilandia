@@ -1,5 +1,5 @@
 import { describe, expect, it, test } from "@jest/globals";
-import { Arma } from "./Arma.ts";
+import { Arma } from "../src/models/Arma.ts";
 
 describe("testando a durabilidade", () => {
     it("quando ataca a durabilidade deve cair", () => {
