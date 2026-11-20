@@ -1,7 +1,8 @@
 import { Local, ItemCura, Arma } from "./Local.js";
+import { Personagem } from "../Personagem.js";
 
 export class Delegacia extends Local {
-  constructor(linha: number, coluna: number) {
+  constructor(linha: number, coluna: number, personagem: Personagem) {
     super("Delegacia", linha, coluna, [
       {
         nome: "Recepção",
@@ -15,7 +16,7 @@ export class Delegacia extends Local {
         nome: "Arsenal",
         descricao: "A porta de ferro foi forçada, mas alguns suportes ainda têm equipamento.",
       },
-    ]);
+    ], personagem);
   }
 
   protected getItensDeCura(): ItemCura[] {

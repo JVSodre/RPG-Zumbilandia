@@ -1,7 +1,9 @@
 import { Local, ItemCura, Arma } from "./Local.js";
+import { Personagem } from "../Personagem.js";
+import { Util } from "../../utils/Util.js";
 
 export class Supermercado extends Local {
-  constructor(linha: number, coluna: number) {
+  constructor(linha: number, coluna: number, personagem: Personagem) {
     super("Supermercado", linha, coluna, [
       {
         nome: "Corredor de Bebidas",
@@ -15,7 +17,7 @@ export class Supermercado extends Local {
         nome: "Açougue",
         descricao: "A câmara fria está entreaberta e faz um zumbido constante.",
       },
-    ]);
+    ], personagem);
   }
 
   protected getItensDeCura(): ItemCura[] {

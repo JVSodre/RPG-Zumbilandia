@@ -36,7 +36,7 @@ function combate(personagem: Personagem, zumbi: Zumbi): boolean { // função qu
             Personagem: personagem.nome,
             VidaPersonagem: `${personagem.vidaAtual}/${personagem.vidaMaxima}`,
             ArmaEquipada: personagem.arma.nome,
-            DurabilidadeArma: personagem.arma.durabilidade,
+            DurabilidadeArma: personagem.arma.durabilidadeAtual,
             VidaZumbi: zumbi.vida}) // mostra a vida do personagem, o dano da arma, a arma equipada e a vida do inimigo    
         
         console.log("1. Atacar");
@@ -109,11 +109,11 @@ function mapa() {
     console.clear();
 
     const todosLocais: Local[] = [
-        new Hospital(2, 45),
-        new Supermercado(4, 48),
-        new Delegacia(6, 50),
-        new Casa(2, 3),
-        new Casa(5, 3),
+        new Hospital(2, 45, personagem),
+        new Supermercado(4, 48, personagem),
+        new Delegacia(6, 50, personagem),
+        new Casa(2, 3, personagem),
+        new Casa(5, 3, personagem),
     ];
 
     const locaisSorteados = Mapa.sortearLocais(todosLocais, 3);
@@ -137,6 +137,7 @@ function mapa() {
     }
 
     const resultado = localEscolhido.explorar();
+    const registraLocal = localEscolhido
     console.clear();
     console.log(`===== Explorando: ${resultado.local} (${resultado.subArea.nome}) =====`);
     console.log(resultado.subArea.descricao);
@@ -149,6 +150,9 @@ function mapa() {
                 personagem.vidaAtual + resultado.item.cura
             );
             console.log(`Você encontrou "${resultado.item.nome}" e recuperou ${resultado.item.cura} de vida! (Vida atual: ${personagem.vidaAtual}/${personagem.vidaMaxima})`);
+            console.log()
+            console.log("Após vasculhar um pouco mais, você pegou suprimentos e saiu")
+            registraLocal.atualizaItensJogador();
             teclado("Pressione qualquer tecla para continuar...");   
             break;
 
@@ -163,6 +167,9 @@ function mapa() {
                 );
                 console.log(`${resultado.arma.nome} equipada!`);
             }
+            console.log()
+            console.log("Após vasculhar um pouco mais, você pegou suprimentos e saiu")
+            registraLocal.atualizaItensJogador();
             teclado("Pressione qualquer tecla para continuar...");   
             break;
 
@@ -178,21 +185,27 @@ function mapa() {
                     return;
                 }
             }
+            console.log()
+            console.log("Após vasculhar um pouco mais, você pegou suprimentos e saiu")
+            registraLocal.atualizaItensJogador();
+            teclado("Pressione qualquer tecla para continuar...");   
             break;
     }
 
     escolha = 0;
 }
 
-while (escolha !== 5) { // loop principal do programa, que continua até o usuário escolher sair
+while (escolha !== 7) { // loop principal do programa, que continua até o usuário escolher sair
     console.clear();
     console.log("===== Menu ====="); 
     console.log(); // da um espaço em branco no console
-    console.log("1. Mostrar resumo do personagem");
-    console.log("2. Upar Personagem");
+    console.log("1. Mostrar status do personagem");
+    console.log("2. Mostrar recursos do personagem");
     console.log("3. Descansar e se Curar");
-    console.log("4. Mostrar Mapa");
-    console.log("5. Sair")
+    console.log("4. Concertar Arma")
+    console.log("5. Ler Diario")
+    console.log("6. Mostrar Mapa");
+    console.log("7. Sair")
     console.log();
     escolha = +teclado("Escolha: "); // solicita a escolha do usuário no menu
 
@@ -200,16 +213,28 @@ while (escolha !== 5) { // loop principal do programa, que continua até o usuá
 
         case 1: // exibe o resumo do personagem criado
                 console.clear();
-                console.log("===== Resumo do Personagem =====");
+                console.log("===== Status do Personagem =====");
                 console.log();
-                console.table(personagem);
+                console.table({
+                    Personagem: personagem.nome,
+                    Nivel: personagem.nivel,
+                    Vida: `${personagem.vidaAtual}/${personagem.vidaMaxima}`,
+                    ArmaEquipada: personagem.arma.nome,
+                    DurabilidadeArma: personagem.arma.durabilidadeAtual});
                 console.log();
                 teclado("Pressione qualquer tecla para continuar...");   
             break;
 
         case 2:
-            personagem.uparPersonagem(100)
-            console.log(`Você está no nível ${personagem.nivel} com ${personagem.vidaAtual} de vida e ${personagem.arma.nome} de arma`)
+            console.clear();
+            console.log("===== Recursos do Personagem =====");
+            console.log();
+            console.table({
+                Comida: personagem.comida,
+                Curas: personagem.curas,
+                Reparos: personagem.reparos
+            })
+            console.log()
             teclado("Pressione qualquer tecla para continuar...");   
             break;
 
@@ -221,13 +246,24 @@ while (escolha !== 5) { // loop principal do programa, que continua até o usuá
                 console.log((erro as Error).message)
             }
             teclado("Pressione qualquer tecla para continuar...");   
-            break
-
+            break;
+        
         case 4:
-            mapa() // mostra o mapa ao usuário
-            break
+            try{
+                personagem.concertaArma()
+                console.log("Você concertou sua arma!")
+                teclado("Pressione qualquer tecla para continuar...");
+            } catch(erro) {
+                console.log((erro as Error).message)
+                teclado("Pressione qualquer tecla para continuar...");
+            }
+            break;
 
-        case 5: // sai do loop e encerra o programa
+        case 6:
+            mapa() // mostra o mapa ao usuário
+            break;
+
+        case 7: // sai do loop e encerra o programa
             console.clear();
             console.log("Saindo...");
             break;

@@ -14,11 +14,14 @@ export class Arma {
     public get nome(): string {
         return this._nome;
     }
-    public get durabilidade(): number {
+    public get durabilidadeAtual(): number {
         return this._durabilidade;
     }
     public get dano(): number {
         return this._dano;
+    }
+    public get durabilidadeMaxima(): number {
+        return this._durabilidadeMaxima
     }
 
     public ataque(): void {

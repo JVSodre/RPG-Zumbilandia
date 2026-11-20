@@ -13,6 +13,9 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     private _vidaAtual: number;
     private _arma: Arma;
     private _xp: number;
+    protected _curas: number;
+    private _reparos: number;
+    private _comida: number;
 
     constructor( // construto, função que é executada quando a classe é instanciada
         nome: string, // parâmetros do construtor, valores que precisam ser passados quando a classe é instanciada
@@ -23,6 +26,9 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
         this._vidaAtual = 100;
         this._arma = maoPadrao;
         this._xp = 0;
+        this._curas = 3;
+        this._reparos = 3;
+        this._comida = 3;
     }
 
 
@@ -44,6 +50,16 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     public get xp(): number {
         return this._xp;
     }
+    public get comida(): number{
+        return this._comida
+    }
+    public get curas(): number{
+        return this._curas
+    }
+    public get reparos(): number{
+        return this._reparos
+    }
+
 
 
     public set vidaAtual(vida: number) {
@@ -60,8 +76,9 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     }
 
     public curarPersonagem(): void{
-        if (this._vidaAtual < this._vidaMaxima) {
+        if (this._vidaAtual < this._vidaMaxima && this._curas > 0) {
             this._vidaAtual += 15
+            this._curas -= 1
             if (this._vidaAtual > this._vidaMaxima) {
                 this._vidaAtual = this._vidaMaxima
             }
@@ -85,6 +102,33 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     public restauraVida(): void {
         this._vidaAtual = this._vidaMaxima
     }
+
+    public concertaArma(): void {
+        if (this._reparos <= 0) {
+            throw new Error("Você não tem itens de reparo");
+        } else if(this._arma.durabilidadeAtual == this.arma.durabilidadeMaxima) {
+            throw new Error("A arma não precisa de reparos");
+        } else {
+            this.arma.restaura();
+            this._reparos -= 1;
+        }
+    }
+
+    public reduzComida(): void {
+        this._comida -=1
+    }
+
+    public atualizaCuras(numero: number): void{
+        this._curas += numero
+    } 
+
+    public atualizaReparos(numero: number): void{
+        this._reparos += numero
+    } 
+
+    public atualizaComidas(numero: number): void{
+        this._comida += numero
+    } 
 }
 
 

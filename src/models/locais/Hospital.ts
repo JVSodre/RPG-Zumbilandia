@@ -1,7 +1,8 @@
 import { Local, ItemCura, Arma } from "./Local.js";
+import { Personagem } from "../Personagem.js";
 
 export class Hospital extends Local {
-  constructor(linha: number, coluna: number) {
+  constructor(linha: number, coluna: number, personagem: Personagem) {
     super("Hospital Central", linha, coluna, [
       {
         nome: "Sala de Triagem",
@@ -15,7 +16,7 @@ export class Hospital extends Local {
         nome: "Farmácia Interna",
         descricao: "Armários de vidro quebrados, mas algumas gavetas seguem trancadas.",
       },
-    ]);
+    ], personagem);
   }
 
   protected getItensDeCura(): ItemCura[] {

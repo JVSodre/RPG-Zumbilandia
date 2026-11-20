@@ -1,3 +1,6 @@
+import { Personagem } from "../Personagem.ts";
+import { Util } from "../../utils/Util.js";
+
 export interface SubArea {
   nome: string;
   descricao: string;
@@ -39,17 +42,30 @@ export abstract class Local {
   public linha: number;
   public coluna: number;
   protected subAreas: SubArea[];
+  protected personagem: Personagem;
 
-  constructor(nome: string, linha: number, coluna: number, subAreas: SubArea[]) {
+  constructor(nome: string, linha: number, coluna: number, subAreas: SubArea[], personagem: Personagem) {
     this.nome = nome;
     this.linha = linha;
     this.coluna = coluna;
     this.subAreas = subAreas;
+    this.personagem = personagem;
   }
 
   protected abstract getItensDeCura(): ItemCura[];
   protected abstract getArmasRaras(): Arma[];
   protected abstract getMaxZumbis(): number;
+
+  private randomizaItens(inicio: number, fim: number): number{
+    let numeroRandomizado = Util.randomizar(inicio, fim)
+    return numeroRandomizado
+  }
+
+  public atualizaItensJogador(): void{
+    this.personagem.atualizaComidas(this.randomizaItens(0, 3))
+    this.personagem.atualizaCuras(this.randomizaItens(0, 2))
+    this.personagem.atualizaReparos(this.randomizaItens(0, 1))
+  }
 
   // Método auxiliar seguro contra arrays vazios (satisfaz noUncheckedIndexedAccess)
   private sortearItem<T>(lista: T[]): T {

@@ -59,7 +59,7 @@ export class Combate {
     }
 
     private static verificaDurabilidadeArma(personagem: Personagem): {quebrou: boolean; nomeArma?: string;} {
-        if (personagem.arma.durabilidade <= 0) {
+        if (personagem.arma.durabilidadeAtual <= 0) {
             const nomeArma = personagem.arma.nome;
             personagem.arma.restaura();
             personagem.trocaArma = this.criarMao();

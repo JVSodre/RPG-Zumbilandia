@@ -1,7 +1,8 @@
 import { Local, ItemCura, Arma, SubArea } from "./Local.js";
+import { Personagem } from "../Personagem.js";
 
 export class Casa extends Local {
-  constructor(linha: number, coluna: number) {
+  constructor(linha: number, coluna: number, personagem: Personagem) {
     const adjetivos = [
       "Verde",
       "com Portão de Garagem Aberto",
@@ -36,7 +37,7 @@ export class Casa extends Local {
     ];
 
     // Passa o nome já montado com o adjetivo para a classe pai Local
-    super(`Casa ${adjetivoSorteado}`, linha, coluna, subAreas);
+    super(`Casa ${adjetivoSorteado}`, linha, coluna, subAreas, personagem);
   }
 
   protected getItensDeCura(): ItemCura[] {
