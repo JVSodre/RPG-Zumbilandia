@@ -195,17 +195,16 @@ function mapa() {
     escolha = 0;
 }
 
-while (escolha !== 7) { // loop principal do programa, que continua até o usuário escolher sair
+while (escolha !== 6) { // loop principal do programa, que continua até o usuário escolher sair
     console.clear();
-    console.log("===== Menu ====="); 
+    console.log("===== Abrigo ====="); 
     console.log(); // da um espaço em branco no console
     console.log("1. Mostrar status do personagem");
     console.log("2. Mostrar recursos do personagem");
     console.log("3. Descansar e se Curar");
     console.log("4. Concertar Arma")
-    console.log("5. Ler Diario")
-    console.log("6. Mostrar Mapa");
-    console.log("7. Sair")
+    console.log("5. Mostrar Mapa");
+    console.log("6. Sair")
     console.log();
     escolha = +teclado("Escolha: "); // solicita a escolha do usuário no menu
 
@@ -242,6 +241,7 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
             try{
                 personagem.curarPersonagem()
                 console.log(`Você se curou! ${personagem.vidaAtual}/${personagem.vidaMaxima}`)
+                personagem.reduzComida()
             } catch (erro) {
                 console.log((erro as Error).message)
             }
@@ -252,6 +252,7 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
             try{
                 personagem.concertaArma()
                 console.log("Você concertou sua arma!")
+                personagem.reduzComida()
                 teclado("Pressione qualquer tecla para continuar...");
             } catch(erro) {
                 console.log((erro as Error).message)
@@ -259,11 +260,11 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
             }
             break;
 
-        case 6:
+        case 5:
             mapa() // mostra o mapa ao usuário
             break;
 
-        case 7: // sai do loop e encerra o programa
+        case 6: // sai do loop e encerra o programa
             console.clear();
             console.log("Saindo...");
             break;

@@ -28,16 +28,22 @@ export class Combate {
         return { danoSofrido: danoFinal, critico};
     }
 
-    public static turnoAtaque(personagem: Personagem, zumbi: Zumbi): ResultadoTurno {
-        const danoCausado = personagem.arma.dano;
-        personagem.arma.ataque();
-        zumbi.vida = Math.max(0, zumbi.vida - danoCausado);       
+    private static executarAtaquePersonagem(personagem: Personagem, zumbi: Zumbi): {danoCausado: number} {
+        let zumbiVida = zumbi.vida;
+        const danoCausado = zumbiVida - personagem.arma.dano
+        zumbi.vida -= personagem.arma.dano
+        personagem.arma.ataque()
 
+        return {danoCausado: danoCausado}
+    }
+
+    public static turnoAtaque(personagem: Personagem, zumbi: Zumbi): ResultadoTurno {
+        const danoCausado = this.executarAtaquePersonagem(personagem, zumbi)       
         const statusArma = this.verificaDurabilidadeArma(personagem);
 
         if (zumbi.vida <= 0) {
             return {
-                danoCausado,
+                danoCausado: danoCausado.danoCausado,
                 danoSofrido: 0,
                 zumbiDerrotado: true,
                 zumbiCriticoAtivado: false,
@@ -49,7 +55,7 @@ export class Combate {
         const ataqueZumbi = this.executarAtaqueZumbi(personagem, zumbi);
 
         return {
-            danoCausado,
+            danoCausado: danoCausado.danoCausado,
             danoSofrido: ataqueZumbi.danoSofrido,
             zumbiDerrotado: false,
             zumbiCriticoAtivado: ataqueZumbi.critico,
@@ -68,10 +74,7 @@ export class Combate {
         return { quebrou: false };
     }
 
-    public static turnoNormal(
-        personagem: Personagem,
-        zumbi: Zumbi
-    ): ResultadoTurno {
+    public static turnoNormal(personagem: Personagem, zumbi: Zumbi): ResultadoTurno {
         const ataqueZumbi = this.executarAtaqueZumbi(personagem, zumbi);
 
         return {
