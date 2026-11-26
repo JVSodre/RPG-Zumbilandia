@@ -195,15 +195,32 @@ function mapa() {
     escolha = 0;
 }
 
+let dias = 1
+
 while (escolha !== 7) { // loop principal do programa, que continua até o usuário escolher sair
     console.clear();
-    console.log("===== Menu ====="); 
+    if (personagem.vidaAtual == 0) {
+        break
+    }
+    if (personagem.comida == 1) {
+        console.log()
+        console.log("A comida está acabando. Melhor procurar mais.")
+        console.log()
+    } else if (personagem.comida == 0) {
+        console.log("A comida acabou, sua jornada acaba aqui.")
+        console.log()
+        console.log(`Dias sobrevividos ${dias}`)
+        console.log()
+        teclado("Pressione qualquer tecla para continuar...");
+        break;
+    }
+    console.log(`===== Abrigo | Dia ${dias} =====`); 
     console.log(); // da um espaço em branco no console
     console.log("1. Mostrar status do personagem");
     console.log("2. Mostrar recursos do personagem");
     console.log("3. Descansar e se Curar");
     console.log("4. Concertar Arma")
-    console.log("5. Ler Diario")
+    console.log("5. Treinar Personagem")
     console.log("6. Mostrar Mapa");
     console.log("7. Sair")
     console.log();
@@ -213,6 +230,7 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
 
         case 1: // exibe o resumo do personagem criado
                 console.clear();
+                console.log()
                 console.log("===== Status do Personagem =====");
                 console.log();
                 console.table({
@@ -222,11 +240,13 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
                     ArmaEquipada: personagem.arma.nome,
                     DurabilidadeArma: personagem.arma.durabilidadeAtual});
                 console.log();
+                dias += 1
                 teclado("Pressione qualquer tecla para continuar...");   
             break;
 
         case 2:
             console.clear();
+            console.log()
             console.log("===== Recursos do Personagem =====");
             console.log();
             console.table({
@@ -235,32 +255,60 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
                 Reparos: personagem.reparos
             })
             console.log()
+            dias += 1
             teclado("Pressione qualquer tecla para continuar...");   
             break;
 
         case 3: 
             try{
                 personagem.curarPersonagem()
+                console.log()
                 console.log(`Você se curou! ${personagem.vidaAtual}/${personagem.vidaMaxima}`)
+                personagem.reduzComida()
+                dias += 1
             } catch (erro) {
                 console.log((erro as Error).message)
             }
+            console.log()
             teclado("Pressione qualquer tecla para continuar...");   
             break;
         
         case 4:
             try{
                 personagem.concertaArma()
+                console.log()
                 console.log("Você concertou sua arma!")
+                console.table({
+                    Nome: personagem.arma.nome,
+                    Dano: personagem.arma.dano,
+                    Durabilidade: personagem.arma.durabilidadeAtual
+                })
+                console.log()
+                personagem.reduzComida()
+                dias += 1
                 teclado("Pressione qualquer tecla para continuar...");
             } catch(erro) {
+                console.log()
                 console.log((erro as Error).message)
+                console.log()
+                dias += 1
                 teclado("Pressione qualquer tecla para continuar...");
             }
             break;
 
+        case 5: 
+            console.log()
+            personagem.uparPersonagem(100 * personagem.nivel)
+            console.log("Seu personagem ficou mais forte!")
+            console.log()
+            personagem.reduzComida()
+            dias += 1
+            teclado("Pressione qualquer tecla para continuar...");
+            break;
+
         case 6:
             mapa() // mostra o mapa ao usuário
+            dias += 1
             break;
 
         case 7: // sai do loop e encerra o programa

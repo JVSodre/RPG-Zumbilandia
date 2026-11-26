@@ -7,7 +7,7 @@ describe("testando a durabilidade", () => {
 
         bastao.ataque()
 
-        expect(bastao.durabilidade).toBeLessThan(10)
+        expect(bastao.durabilidadeAtual).toBeLessThan(10)
     })
 })
 
@@ -18,7 +18,7 @@ describe("testando a quebra", () => {
 
         do {
             bastao.ataque()
-        } while(bastao.durabilidade > 0)
+        } while(bastao.durabilidadeAtual > 0)
         
             
         expect(() => bastao.ataque()).toThrow("A arma quebrou")

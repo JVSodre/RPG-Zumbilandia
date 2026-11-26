@@ -1,5 +1,5 @@
 import { describe, expect, it, jest, } from "@jest/globals";
-import { Combate } from "./Combate.ts";
+import { Combate } from "../src/services/Combate.ts";
 import { Zumbi } from "../src/models/Zumbi.ts";
 import { ZumbiCritico } from "../src/models/ZumbiCritico.ts";
 import { Personagem } from "../src/models/Personagem.ts";

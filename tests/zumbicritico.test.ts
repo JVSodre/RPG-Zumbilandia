@@ -1,6 +1,6 @@
 import { describe, expect, it, jest, } from "@jest/globals";
-import { ZumbiCritico } from "./src/models/ZumbiCritico.ts";
-import { Util } from "./src/utils/Util.ts";
+import { ZumbiCritico } from "../src/models/ZumbiCritico.ts";
+import { Util } from "../src/utils/Util.ts";
 
 
 describe("Quando usar habilidade", () => {
