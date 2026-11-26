@@ -76,7 +76,10 @@ export class Personagem { // classe (nome de classe primeiro caractere maiusculo
     }
 
     public curarPersonagem(): void{
-        if (this._vidaAtual < this._vidaMaxima && this._curas > 0) {
+        if (this._curas == 0) {
+            throw new Error("Você não possui itens de cura.")
+        }
+        if (this._vidaAtual < this._vidaMaxima) {
             this._vidaAtual += 15
             this._curas -= 1
             if (this._vidaAtual > this._vidaMaxima) {

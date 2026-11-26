@@ -37,6 +37,7 @@ function combate(personagem: Personagem, zumbi: Zumbi): boolean { // função qu
             VidaPersonagem: `${personagem.vidaAtual}/${personagem.vidaMaxima}`,
             ArmaEquipada: personagem.arma.nome,
             DurabilidadeArma: personagem.arma.durabilidadeAtual,
+            ItensCura: personagem.curas,
             VidaZumbi: zumbi.vida}) // mostra a vida do personagem, o dano da arma, a arma equipada e a vida do inimigo    
         
         console.log("1. Atacar");
@@ -240,7 +241,6 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
                     ArmaEquipada: personagem.arma.nome,
                     DurabilidadeArma: personagem.arma.durabilidadeAtual});
                 console.log();
-                dias += 1
                 teclado("Pressione qualquer tecla para continuar...");   
             break;
 
@@ -255,7 +255,6 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
                 Reparos: personagem.reparos
             })
             console.log()
-            dias += 1
             teclado("Pressione qualquer tecla para continuar...");   
             break;
 
@@ -288,10 +287,14 @@ while (escolha !== 7) { // loop principal do programa, que continua até o usuá
                 dias += 1
                 teclado("Pressione qualquer tecla para continuar...");
             } catch(erro) {
+                console.table({
+                    Nome: personagem.arma.nome,
+                    Dano: personagem.arma.dano,
+                    Durabilidade: personagem.arma.durabilidadeAtual
+                })
                 console.log()
                 console.log((erro as Error).message)
                 console.log()
-                dias += 1
                 teclado("Pressione qualquer tecla para continuar...");
             }
             break;
